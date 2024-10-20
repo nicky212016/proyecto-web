@@ -12,6 +12,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/passwordChanger" element={<PasswordChanger />} />
+        
       </Routes>
     </Router>
   );
