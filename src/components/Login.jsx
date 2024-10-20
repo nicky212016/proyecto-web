@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleNavigate = (url) => {
     navigate(url);
@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!email || !password) {
-      alert('Por favor, ingrese su usuario y contraseña.');
+      alert("Por favor, ingrese su usuario y contraseña.");
     } else {
       // Lógica para enviar el formulario
     }
@@ -33,7 +33,9 @@ const Login = () => {
             />
             <h1 className="title">Ingresa tus credenciales</h1>
             <form className="form" onSubmit={handleSubmit}>
-              <label htmlFor="user" className="label">Usuario</label>
+              <label htmlFor="user" className="label">
+                Usuario
+              </label>
               <input
                 type="text"
                 id="email"
@@ -42,7 +44,9 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label htmlFor="password" className="label">Contraseña</label>
+              <label htmlFor="password" className="label">
+                Contraseña
+              </label>
               <input
                 type="password"
                 id="password"
@@ -51,17 +55,23 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button type="submit" className="primary-button login-button">Enviar</button>
+              <button
+                type="submit"
+                className="primary-button login-button"
+                onClick={() => handleNavigate("/aulas")}
+              >
+                Iniciar sesión
+              </button>
             </form>
             <button
               className="primary-button2 login-button"
-              onClick={() => handleNavigate('/registro')}
+              onClick={() => handleNavigate("/registro")}
             >
               Registrarse
             </button>
             <button
               className="subtitle"
-              onClick={() => handleNavigate('/passwordChanger')}
+              onClick={() => handleNavigate("/passwordChanger")}
             >
               Cambiar Contraseña
             </button>

@@ -1,0 +1,97 @@
+.aulas-title {
+  display: flex;
+  text-align: center;
+  color: #c7c7c7;
+  font-size: 50px;
+  justify-content: center;
+  align-content: center;
+}
+
+.container-aulas{
+    display: flex;
+    flex-wrap: nowrap; /* Mantiene columnas en línea horizontal */
+    justify-content: space-between;
+    padding-top: 30%;
+}
+
+.left-column,
+.right-column {
+  width: 45%;
+  padding: 2rem;
+}
+
+.aulas1-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    width: 40vh;
+    background: #FE5355;
+    border-radius: 20px;
+}
+
+.aulas1-card1{
+    display: flex;
+    align-items: center;
+    height: 30vh;
+    width: 30vh;
+    background: #000000;
+    border-radius: 20px;    
+}
+
+.aulas2-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    width: 40vh;
+    background: #FE5355;
+    border-radius: 20px;
+}
+
+.aulas2-card1{
+    display: flex;
+    align-items: center;
+    height: 30vh;
+    width: 30vh;
+    background: #000000;
+    border-radius: 20px;    
+}
+
+.aulas3-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    width: 40vh;
+    background: #FE5355;
+    border-radius: 20px;
+}
+
+.aulas3-card1{
+    display: flex;
+    align-items: center;
+    height: 30vh;
+    width: 30vh;
+    background: #000000;
+    border-radius: 20px;    
+}
+
+.aulas4-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    width: 40vh;
+    background: #FE5355;
+    border-radius: 20px;
+}
+
+.aulas4-card1{
+    display: flex;
+    align-items: center;
+    height: 30vh;
+    width: 30vh;
+    background: #000000;
+    border-radius: 20px;    
+}

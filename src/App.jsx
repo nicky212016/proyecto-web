@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import Registro from './components/Registro.jsx';
 import PasswordChanger from './components/PasswordChanger.jsx';
+import Aulas from './components/Aulas.jsx';
 import './App.css';
+import './Aulas.css';
 
 const App = () => {
   return (
@@ -12,7 +14,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/passwordChanger" element={<PasswordChanger />} />
-        
+        <Route path="/aulas" element={<Aulas />} />
       </Routes>
     </Router>
   );
