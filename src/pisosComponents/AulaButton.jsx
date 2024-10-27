@@ -2,7 +2,9 @@ import React from "react";
 import { useState } from "react";
 import "./AulaButton.css";
 
-const AulaButton = ({ aula,piso,salon, link }) => {
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
+const AulaButton = ({aula,piso,salon}) => {
   const [state, SetState] = useState(false);
   const buttonClassName = state
     ? "ur-aulaButton-button active"
@@ -13,9 +15,6 @@ const AulaButton = ({ aula,piso,salon, link }) => {
   const handleMouseLeave = () => {
     SetState(false);
   };
-  const handleClick = () => {
-    alert("Imagina que cambiaste de página");
-  };
   return (
     <div className="ur-aulaButton">
       <div className="ur-aulaButton-code">{aula}{piso}0{salon}</div>
@@ -23,9 +22,9 @@ const AulaButton = ({ aula,piso,salon, link }) => {
         className={buttonClassName}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
       >
-        Ver Disponibilidad
+        <Link to="/salon" state={{aula:aula,piso:piso,salon:salon}}>Ver Disponibilidad</Link>
+        
       </div>
     </div>
   );

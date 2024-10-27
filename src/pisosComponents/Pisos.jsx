@@ -1,7 +1,6 @@
 import React from "react";
 import PisoCard from "./PisoCard";
-import Header from "../generalComponentes/Header";
-
+import Header from "../generalComponents/Header";
 import './Pisos.css'
 
 const Pisos = ({aula}) => {
