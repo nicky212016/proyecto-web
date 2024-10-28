@@ -1,0 +1,69 @@
+.ur-pisoCard{
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+    justify-content: center; 
+    align-items: center;
+    background-color: #fe5355;
+    color: #ffffff;
+    width: 720px;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    transition: ease .5s;
+}
+
+.ur-pisoCard.hover{
+    background-color: #993435;
+    transition: ease .2s;
+}
+
+.ur-pisoCard.open{
+    width: 720px;
+    height: 825px;
+    border-radius: 20px;
+    transition: ease .5s;
+}
+
+.ur-pisoCard-img{ 
+    border-radius: 20px;
+    margin-top: 20px;
+    border: 20px solid #090909;
+    height: 375px;
+    width: 600px;
+    top: 0;
+    transition: ease .5s;
+}
+
+.ur-pisoCard.open .ur-pisoCard-img{
+    height: 300px;
+    width: 480px;
+    margin-top: 10px;
+}
+
+.ur-pisoCard-title{
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.ur-pisoCard-buttonList{
+    display: none;
+    align-content: center;
+    grid-template-columns: repeat(2, 1fr); /* 3 columnas */
+    grid-template-rows: repeat(3, 1fr);    /* 2 filas */
+    gap: 40px; /* Espacio entre los botones */
+    width: auto; /* Ancho de la cuadrícula */
+    max-width: 600px; /* Ancho máximo de la cuadrícula */
+    margin: 0 auto; /* Centrar la cuadrícula en la pantalla */
+    margin-bottom: 20px;
+    transition: ease 1s;
+}
+
+.ur-pisoCard-buttonList.visible{
+    display: grid;
+    transition: ease 1s;
+}

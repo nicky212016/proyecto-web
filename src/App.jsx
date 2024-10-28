@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login.jsx";
 import Registro from "./components/Registro.jsx";
 import PasswordChanger from "./components/PasswordChanger.jsx";
-import Aulas from "./aulaComponents/Aulas.jsx";
+import Aulas from "./aulaComponents/Aulas.js";
 import "./App.css";
 
 const App = () => {
@@ -19,6 +19,4 @@ const App = () => {
       </Routes>
     </Router>
   );
-};
-
 export default App;

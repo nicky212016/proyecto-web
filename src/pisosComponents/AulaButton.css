@@ -1,0 +1,37 @@
+.ur-aulaButton{
+    display: flex;
+    width: 250px;
+    height: 50px;
+    flex-direction: row;
+}
+
+.ur-aulaButton-code{
+    text-align: center;
+    align-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: black;
+    height: 100%;
+    width: 40%;
+    left:0;
+}
+
+.ur-aulaButton-button{
+    text-align: center;
+    align-content: center;
+    background-color: aliceblue;
+    color: black;
+    height: 100%;
+    width: 60%;
+    right: 0;
+}
+
+.ur-aulaButton-button.active{
+    text-align: center;
+    align-content: center;
+    background-color: rgb(124, 129, 133);
+    color: black;
+    height: 100%;
+    width: 60%;
+    right: 0;
+}
