@@ -5,7 +5,7 @@ import "./PisoCard.css";
 
 const PisoCard = ({ aula, imgUrl, piso, initialState = "default" }) => {
   const [state, setState] = useState(initialState);
-
+  
   //Manejaremos el estado de la card mediante su clase
   const divClassName =
     state === "default"

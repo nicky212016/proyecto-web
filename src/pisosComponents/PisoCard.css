@@ -17,35 +17,14 @@
 }
 
 .ur-pisoCard.hover{
-    display: flex;
-    flex-direction: column; 
-    gap: 10px;
-    justify-content: center; 
-    align-items: center;
     background-color: #993435;
-    color: #ffffff;
-    width: 720px;
-    height: 500px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    overflow: hidden;
-    text-align: center;
     transition: ease .2s;
 }
 
 .ur-pisoCard.open{
-    display: flex;
-    flex-direction: column; 
-    gap: 10px;
-    justify-content: center; 
-    align-items: center;
-    color: #ffffff;
     width: 720px;
     height: 825px;
-    border: 1px solid #ccc;
     border-radius: 20px;
-    overflow: hidden;
-    text-align: center;
     transition: ease .5s;
 }
 

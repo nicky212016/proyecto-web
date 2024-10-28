@@ -1,5 +1,5 @@
 import Pisos from "./pisosComponents/Pisos"
-import Salon from "./aulaComponents/Salon";
+import Salon from "./salonComponents/Salon";
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './index.css'
 
