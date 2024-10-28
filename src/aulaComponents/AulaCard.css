@@ -1,0 +1,35 @@
+.ur-aulaCard{
+    flex-direction: column;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    width: 50vh;
+    background: #FE5355;
+    border-radius: 20px;
+}
+
+.ur-aulaCard.hover{
+    background-color: #993435;
+    transition: ease .2;
+}
+
+.ur-aulaCard-img{
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 30vh;
+    width: 40vh;
+    background: #000000;
+    border: 20px solid black;
+    border-radius: 20px;
+    margin-top: 20px;    
+}
+
+.ur-aulaCard-title{
+    font-size: 60px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
