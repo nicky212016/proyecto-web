@@ -1,0 +1,174 @@
+
+:root{
+    --red: #9e0b0f;
+    --bold-white: #c7c7c7;
+    --input-field: #f7f7f7;
+    --black: black;
+
+    /* medidas importantes*/
+    --sm:14px;
+    --md:16px;
+    --lg:18px;
+}
+
+body{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    width: 300px;
+    height: 500px;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo-uao{
+    width: 100px;
+    margin-bottom: 20px;
+    justify-self: center;
+    display: flex;
+}
+
+.title{
+    font-size: var(--lg);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.subtitle{
+    color: var(--red);
+    font-size: var(--md);
+    font-weight: 300;
+    margin-bottom: 30px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+.label{
+    font-size: var(--sm);
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.input{
+    background-color: var(--input-field);
+    border: none;
+    border-radius: 8px;
+    height: 30px;
+    font-size: var(--md);
+    padding: 6px;
+    margin-bottom: 10px;
+}
+
+.primary-button{
+    background-color: var(--red);
+    border-radius: 8px;
+    border: none;
+    color: var(--bold-white);
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    font-size: var(--md);
+    font-weight: bold;
+    text-decoration: none; /* Para quitar el subrayado del enlace */
+    text-align: center;
+}
+
+.primary-button2{
+    background-color: var(--red);
+    border-radius: 8px;
+    border: none;
+    color: var(--bold-white);
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    font-size: var(--md);
+    font-weight: bold;
+    text-decoration: none; /* Para quitar el subrayado del enlace */
+    text-align: center;
+    margin-top: 14px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Centra el texto horizontalmente */
+    align-items: center; /* Centra el texto verticalmente */
+    
+}
+
+.login-button{
+    margin-top: 14px;
+    margin-bottom: 20px;
+}
+
+
+.layout {
+    display: flex;
+    width: 100px;
+    height: 550px;
+    padding-left: 1000px;
+    background-color: #9e0b0f;
+    background-image: url('https://www.dropbox.com/scl/fi/avzo6jjgqquqvusc0gxs7/BANNER.png?rlkey=oug4lgkl5ytdnz9rysodgaila&st=ahdepdt8&dl=1');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.todo{
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    justify-items: center;
+    padding-top: 50px;
+}
+
+.barra-roja {
+    width: 100%;
+    height: 14vh;
+    background-color: var(--red);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        width: 80%;
+        height: auto;
+    }
+
+    .layout {
+        display: none; /* Oculta el banner lateral en pantallas más pequeñas */
+    }
+
+    .todo {
+        padding-top: 14vh; /* Ajusta el espaciado superior para que no quede cubierto por la barra roja */
+    }
+
+    .barra-roja {
+        height: 10vh; /* Ajusta el tamaño de la barra en pantallas más pequeñas */
+    }
+
+    .logo-uao {
+        width: 80px; /* Reduce el tamaño del logo en pantallas medianas */
+    }
+}
