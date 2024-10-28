@@ -18,5 +18,6 @@ const App = () => {
         <Route path="/salon" element={<Salon />} />
       </Routes>
     </Router>
-  );
+);
+}
 export default App;
