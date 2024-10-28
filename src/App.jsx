@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login.jsx";
 import Registro from "./components/Registro.jsx";
 import PasswordChanger from "./components/PasswordChanger.jsx";
-import Aulas from "./salonComponents/Aulas.js";
+import Aulas from "./aulaComponents/Aulas.js";
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Routes>
@@ -19,6 +19,4 @@ function App() {
       </Routes>
     </Router>
   );
-}
-
 export default App;
