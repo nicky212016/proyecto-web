@@ -6,20 +6,22 @@ import PasswordChanger from "./components/PasswordChanger.jsx";
 import Aulas from "./aulaComponents/Aulas.jsx";
 import Pisos from "./pisosComponents/Pisos";
 import Salon from "./salonComponents/Salon";
-
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/registro" element={<Registro />} />
-        <Route path="/passwordChanger" element={<PasswordChanger />} />
-        <Route path="/aulas" element={<Aulas />} />
-        <Route path="/pisos" element={<Pisos />} />
-        <Route path="/salon" element={<Salon />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path="/passwordChanger" element={<PasswordChanger />} />
+          <Route path="/aulas" element={<Aulas />} />
+          <Route path="/pisos" element={<Pisos />} />
+          <Route path="/salon" element={<Salon />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 export default App;

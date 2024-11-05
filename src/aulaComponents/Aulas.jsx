@@ -2,13 +2,12 @@
 import React from "react";
 import "./Aulas.css";
 import AulaCard from "./AulaCard";
+import Header from "../generalComponents/Header";
 
 const Aulas = () => {
   return (
     <>
-      <div className="barra-roja">
-        <h1 className="aulas-title">Aulas</h1>
-      </div>
+      <Header titulo={"Aulas"} />      
       <div className="ur-Aulas">
         <AulaCard aula={'1'} imgUrl={'https://media.cnn.com/api/v1/images/stellar/prod/cnne-1479579-las-declaraciones-de-maduro-tras-firmar-el-acuerdo-de-barbados.jpg?c=original'}/>
         <AulaCard aula={'2'} imgUrl={'https://steamuserimages-a.akamaihd.net/ugc/2504639238669974091/72E61C5E512E39DF5B4D3156594F9D22D75A291A/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true'}/>
