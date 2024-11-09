@@ -1,7 +1,32 @@
 import React from "react";
 import "./App.css";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useForm } from "react-hook-form";
+import { Form } from "react-bootstrap";
 
 const Registro = () => {
+  const navigate = useNavigate();
+  const { signUp, errors: signUpErrors, isAuthenticated } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  useEffect(() => {
+    if (isAuthenticated) 
+      navigate("/aulas");
+    }, [isAuthenticated]);
+
+  const handleNavigate = (url) => {
+    navigate(url);
+  };
+
+  const onSubmit = handleSubmit((data) => {
+    signUp(data);
+  });
+
   return (
     <div className="login">
       <div className="container">
@@ -14,54 +39,42 @@ const Registro = () => {
         <p className="subtitle">
           Escribe tus datos para completar el registro con éxito
         </p>
-        <form action="/" className="form">
-          <label for="name" className="label">
-            Nombre
-          </label>
-          <input
-            type="text"
-            ide="name"
-            placeholder="Nombre"
-            className="input input-name"
-          ></input>
+        <Form onSubmit={onSubmit}>
+          <h4>Nombre</h4>
+          <input type="text" {...register("name", { required: true })} />
+          {errors.name && (
+            <p className="text-danger">Este campo es requerido</p>
+          )}
 
-          <label for="last name" className="label">
-            Apellidos
-          </label>
-          <input
-            type="text"
-            id="last-name"
-            placeholder="Apellidos"
-            className="input input-lastname"
-          ></input>
+          <h4>Apellido</h4>
+          <input type="text" {...register("lastname", { required: true })} />
+          {errors.lastname && (
+            <p className="text-danger">Este campo es requerido</p>
+          )}
 
-          <label for="last name" className="label">
-            Correo institucional
-          </label>
-          <input
-            type="text"
-            id="email"
-            placeholder="user@uao.edu.co"
-            className="input input-email"
-          ></input>
+          <h4>Correo institucional</h4>
+          <input type="text" {...register("email", { required: true })} />
+          {errors.email && (
+            <p className="text-danger">Este campo es requerido</p>
+          )}
 
-          <label for="password" className="label">
-            Contraseña
-          </label>
-          <input
-            type="password"
-            id="password"
-            placeholder="********"
-            className="input input-password"
-          ></input>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              {...register("password", { required: true })}
+            />
+            {errors.password && (
+              <p className="text-danger">Password is required</p>
+            )}
+          </Form.Group>
 
-          <button
-            onClick={() => handleNavigate("/")}
-            className="primary-button login-button"
-          >
-            Enviar
+          <button type="submit" className="primary-button login-button">
+            Registrarse
           </button>
-        </form>
+          <p>{signUpErrors}</p>
+        </Form>
       </div>
     </div>
   );

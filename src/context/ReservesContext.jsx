@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import fireDB from "../crud/firebase";
+import fireDB from "../firebase/credentials";
 import { getAuth } from "firebase/auth";
 import {
   getFirestore,
