@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -26,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const signUp = async ({email, password, name, lastname}) => {
+  const signUp = async ({ email, password, name, lastname }) => {
     try {
       console.log("Creating user");
       const userCredential = await createUserWithEmailAndPassword(
@@ -46,7 +47,10 @@ export const AuthProvider = ({ children }) => {
       const userDoc = await getDoc(docRef);
       const userInfo = userDoc.data();
 
-      setUser(userInfo);
+      setUser({
+        id: userCredential.user.uid,
+        ...userInfo,
+      });
       setIsAuthenticated(true);
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -74,8 +78,11 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       );
-      const user = userCredential.user;
-      setUser(user);
+      const userInfo = userCredential.user;
+      setUser({
+        id: userCredential.user.uid,
+        ...userInfo,
+      });
       setIsAuthenticated(true);
     } catch (error) {
       setError(error.message);
@@ -93,11 +100,34 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setLoading(true);
+      if (user) {
+        try {
+          const docRef = doc(fireStore, "users", user.uid);
+          const userDoc = await getDoc(docRef);
+          const userData = userDoc.exists() ? userDoc.data() : null;
+
+          if (userData) {
+            setUser({ id: user.uid, ...userData });
+            setIsAuthenticated(true);
+          } else {
+            setIsAuthenticated(false);
+            setUser(null);
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          setIsAuthenticated(false);
+          setUser(null);
+        }
+      } else {
+        setIsAuthenticated(false);
+        setUser(null);
+      }
       setLoading(false);
     });
-    return unsubscribe;
+
+    return () => unsubscribe();
   }, []);
 
   return (
