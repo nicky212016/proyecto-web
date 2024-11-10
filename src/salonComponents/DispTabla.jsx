@@ -1,55 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./DispTabla.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ModalRes from "./ModalRes";
-("");
+
+import { useReserves } from "../context/ReservesContext";
+import { useAuth } from "../context/AuthContext";
 
 const DispTabla = () => {
-
   const [showModal, setShowModal] = useState(false);
+  const { allReserves } = useReserves();
+  const {isAuthenticated } = useAuth();
+  const [reserves, setReserves] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await allReserves();
+      setReserves(res);
+    };
+    fetchData();
+  }, [allReserves]);
 
   const handleShow = () => {
     setShowModal(true);
-  }
+  };
 
   const handleClose = () => {
     setShowModal(false);
-  }
-
-  const [data, setData] = useState([
-    {
-      id: 1,
-      horaInicio: "06:00",
-      horaFin: "07:00",
-      estado: "Sin Reservar",
-      motivo: "",
-    },
-  ]);
-
-  const updateTabla = ({ horaInicio, horaFin, estado, motivo }) => {
-    const newRow = {
-      id: data.length + 1,
-      horaInicio: horaInicio,
-      horaFin: horaFin,
-      estado: estado,
-      motivo: motivo,
-    };
-    setData([...data, newRow]);
-  };
-
-  const celdaEstado = (estado) => {
-    return estado === "Sin Reservar" ? (
-      <Link to={"/"}>Sin Reservar</Link>
-    ) : (
-      "Reservado"
-    );
-  };
-  const claseEstado = (estado) => {
-    return estado === "Sin Reservar"
-      ? "ur-dispTabla-rowEstado activo"
-      : "ur-dispTabla-rowEstado";
   };
 
   return (
@@ -59,25 +36,35 @@ const DispTabla = () => {
           <thead>
             <tr>
               <th>Hora</th>
-              <th>Estado</th>
+              <th>Salón</th>
               <th>Motivo</th>
+              <th>Código Estudiante</th>
+              <th>Teléfono</th>
+              <th>Razón</th>
             </tr>
           </thead>
           <tbody>
-            {data.map((row) => (
-              <tr key={row.id}>
-                <td className="ur-dispTabla-rowHora">
-                  {row.horaInicio} - {row.horaFin}
-                </td>
-                <td className={claseEstado(row.estado)}>
-                  {celdaEstado(row.estado)}
-                </td>
-                <td className="ur-dispTabla-rowMotivo">{row.motivo}</td>
+            {reserves ? (
+              reserves.map((reserve) => (
+                <tr key={reserve.id}>
+                  <td>{reserve.start + "-" + reserve.end}</td>
+                  <td>{reserve.room}</td>
+                  <td>{reserve.reason}</td>
+                  <td>{reserve.studentCode}</td>
+                  <td>{reserve.phone}</td>
+                  <td>{reserve.reason}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6">No hay reservas</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
-        <button onClick={handleShow}>Agregar Reserva</button>
+        {isAuthenticated ? (
+          <button onClick={handleShow}>Agregar Reserva</button>
+        ) : null}
       </div>
       <ModalRes show={showModal} handleClose={handleClose} />
     </>

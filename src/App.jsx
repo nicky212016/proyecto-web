@@ -7,23 +7,27 @@ import Aulas from "./aulaComponents/Aulas.jsx";
 import Pisos from "./pisosComponents/Pisos";
 import Salon from "./salonComponents/Salon";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { ReservesProvider } from "./context/ReservesContext.jsx";
 import ProtectedRoute from "./utils/ProtectedRoute.jsx";
 
 const App = () => {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
-          <Route path="/passwordChanger" element={<PasswordChanger />} />
-          <Route element={<ProtectedRoute />}> {/* protege el acceso si no se está logueado */}
-            <Route path="/aulas" element={<Aulas />} />
-            <Route path="/pisos" element={<Pisos />} />
-            <Route path="/salon" element={<Salon />} />
-          </Route>
-        </Routes>
-      </Router>
+      <ReservesProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/registro" element={<Registro />} />
+            <Route path="/passwordChanger" element={<PasswordChanger />} />
+            <Route element={<ProtectedRoute />}>
+              {/* protege el acceso si no se está logueado */}
+              <Route path="/aulas" element={<Aulas />} />
+              <Route path="/pisos" element={<Pisos />} />
+              <Route path="/salon" element={<Salon />} />
+            </Route>
+          </Routes>
+        </Router>
+      </ReservesProvider>
     </AuthProvider>
   );
 };

@@ -22,30 +22,72 @@ const auth = getAuth(fireDB);
 const fireStore = getFirestore(fireDB);
 
 export const ReservesContext = createContext();
-export const ReservesProvider = ({ Children }) => {
+export const ReservesProvider = ({ children }) => {
   const [reserves, setReserves] = useState([]);
-  const createReserve = async (
-    room,
-    studentCode,
-    phone,
-    start,
-    end,
-    reason
-  ) => {
-    const reserveId = uuidv4();
-    try {
-      const docRef = await setDoc(doc(fireStore, "reserves", reserveId), {
-        room: room,
-        studentCode: studentCode,
-        phone: phone,
-        start: start,
-        end: end,
-        reason: reason,
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
+  const [reserveData, setReserveData] = useState({
+    aula: null,
+    piso: null,
+    salon: null,
+    start: null,
+    end: null,
+    reason: "",
+    studentCode: "",
+    phone: "",
+  });
+
+  const createReserve = async (newReserve) => {
+    const isAvailable = await checkAvailability(
+      newReserve.room,
+      newReserve.start,
+      newReserve.end,
+      newReserve.date
+    );
+
+    if (isAvailable) {
+      const reserveData = {
+        start: newReserve.start,
+        end: newReserve.end,
+        room: newReserve.room,
+        reason: newReserve.reason,
+        studentCode: newReserve.studentCode,
+        phone: newReserve.phone,
+        date: newReserve.date,
+      };
+
+      await addDoc(collection(db, "reserves"), reserveData);
+      setReserves([...reserves, reserveData]);
+    } else {
+      alert("El salón ya está reservado en este horario. Elija otro horario.");
     }
+  };
+
+  const checkAvailability = async (room, start, end, date) => {
+    const reservesRef = collection(db, "reserves");
+    const q = query(
+      reservesRef,
+      where("room", "==", room),
+      where("date", "==", date)
+    );
+
+    const querySnapshot = await getDocs(q);
+    let isAvailable = true;
+
+    querySnapshot.forEach((doc) => {
+      const reserve = doc.data();
+
+      const reserveStart = reserve.start;
+      const reserveEnd = reserve.end;
+
+      if (
+        (start >= reserveStart && start < reserveEnd) ||
+        (end > reserveStart && end <= reserveEnd) ||
+        (start <= reserveStart && end >= reserveEnd)
+      ) {
+        isAvailable = false;
+      }
+    });
+
+    return isAvailable;
   };
 
   const deleteReserve = async (reserveId, studentCode) => {
@@ -67,13 +109,41 @@ export const ReservesProvider = ({ Children }) => {
 
   const allReserves = async () => {
     const reserves = [];
-    const q = query(collection(fireStore, "reserves"));
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(collection(fireStore, "reserves"));
     querySnapshot.forEach((doc) => {
-      reserves.push(doc.data());
+      reserves.push({
+        id: doc.id,
+        ...doc.data(),
+      });
     });
-    setReserves(reserves);
+    return reserves;
   };
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const now = new Date().getTime();
+      const reserves = await allReserves();
+      reserves.forEach((reserve) => {
+        const endTime = new Date(reserve.end).getTime();
+        if (now > endTime) deleteReserve(reserve.id);
+      });
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <ReservesContext.Provider
+      value={{
+        createReserve,
+        deleteReserve,
+        allReserves,
+        reserveData,
+        setReserveData,
+      }}
+    >
+      {children}
+    </ReservesContext.Provider>
+  );
 };
 
 export const useReserves = () => {

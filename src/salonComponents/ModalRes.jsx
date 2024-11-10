@@ -1,81 +1,92 @@
 import React from "react";
 import { Button, Modal, Form } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useForm } from "react-hook-form";
+import { useReserves } from "../context/ReservesContext";
 
-const ModalRes = ({ show, handleClose }) => {
+const ModalRes = ({ show, handleClose, room }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { createReserve } = useReserves();
+
+  const availableHours = [
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+  ];
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    createReserve({ ...data, room });
+    handleClose();
   });
 
   return (
-    <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header>Reservar</Modal.Header>
-        <Modal.Body>
-          <form onSubmit={onSubmit}>
-            <h4>Nombres</h4>
-            <input type="text" {...register("nombres", { required: true })} />
-            {errors.nombres && (
-              <p className="text-danger">Este campo es requerido</p>
-            )}
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Reservar Salón</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            {...register("studentCode", { required: true })}
+            placeholder="Código Estudiante"
+          />
+          {errors.studentCode && <span>Este campo es requerido</span>}
 
-            <h4>Apellidos</h4>
-            <input type="text" {...register("apellidos", { required: true })} />
-            {errors.apellidos && (
-              <p className="text-danger">Este campo es requerido</p>
-            )}
+          <input
+            type="text"
+            {...register("phone", { required: true })}
+            placeholder="Teléfono"
+          />
+          {errors.phone && <span>Este campo es requerido</span>}
 
-            <h4>Código</h4>
-            <input type="text" {...register("codigo", { required: true })} />
-            {errors.codigo && (
-              <p className="text-danger">Este campo es requerido</p>
-            )}
+          <label>Fecha</label>
+          <input type="date" {...register("date", { required: true })} />
+          {errors.date && <span>Este campo es requerido</span>}
 
-            <h4>Teléfono</h4>
-            <input type="text" {...register("telefono", { required: true })} />
-            {errors.telefono && (
-              <p className="text-danger">Este campo es requerido</p>
-            )}
+          <label>Hora de Inicio</label>
+          <select {...register("start", { required: true })}>
+            {availableHours.map((hour) => (
+              <option key={hour} value={hour}>
+                {hour}
+              </option>
+            ))}
+          </select>
+          {errors.start && <span>Este campo es requerido</span>}
 
-            <h4>Hora de inicio</h4>
-            <input
-              type="text"
-              {...register("horaInicio", { required: true })}
-            />
-            {errors.horaInicio && (
-              <p className="text-danger">Este campo es requerido</p>
-            )}
+          <label>Hora de Fin</label>
+          <select {...register("end", { required: true })}>
+            {availableHours.map((hour) => (
+              <option key={hour} value={hour}>
+                {hour}
+              </option>
+            ))}
+          </select>
+          {errors.end && <span>Este campo es requerido</span>}
 
-            <h4>Hora de finalización</h4>
-            <input type="text" {...register("horaFin", { required: true })} />
-            {errors.horaFin && (
-              <p className="text-danger">Este campo es requerido</p>
-            )}
+          <input
+            type="text"
+            {...register("reason", { required: true })}
+            placeholder="Motivo"
+          />
+          {errors.reason && <span>Este campo es requerido</span>}
 
-            <h4>Motivo</h4>
-            <input type="text" {...register("motivo", { required: true })} />
-            {errors.motivo && (
-              <p className="text-danger">Este campo es requerido</p>
-            )}
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancelar
-          </Button>
-          <Button type="submit" variant="primary">
+          <Button variant="primary" type="submit">
             Reservar
           </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+        </form>
+      </Modal.Body>
+    </Modal>
   );
 };
 
