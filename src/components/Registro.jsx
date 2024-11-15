@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { Form } from "react-bootstrap";
+import { useEffect } from "react";
+
 
 const Registro = () => {
   const navigate = useNavigate();
@@ -15,13 +17,8 @@ const Registro = () => {
   } = useForm();
 
   useEffect(() => {
-    if (isAuthenticated) 
-      navigate("/aulas");
-    }, [isAuthenticated]);
-
-  const handleNavigate = (url) => {
-    navigate(url);
-  };
+    if (isAuthenticated) navigate("/aulas");
+  }, [isAuthenticated]);
 
   const onSubmit = handleSubmit((data) => {
     signUp(data);
@@ -40,29 +37,46 @@ const Registro = () => {
           Escribe tus datos para completar el registro con éxito
         </p>
         <Form onSubmit={onSubmit}>
-          <h4>Nombre</h4>
-          <input type="text" {...register("name", { required: true })} />
-          {errors.name && (
-            <p className="text-danger">Este campo es requerido</p>
-          )}
+          
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Nombre</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Nombre"
+              {...register("name", { required: true })}
+            />
+            {errors.email && <p className="text-danger">Name is required</p>}
+          </Form.Group>
 
-          <h4>Apellido</h4>
-          <input type="text" {...register("lastname", { required: true })} />
-          {errors.lastname && (
-            <p className="text-danger">Este campo es requerido</p>
-          )}
+          
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Apellido</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Apellido"
+              {...register("lastname", { required: true })}
+            />
+            {errors.email && (
+              <p className="text-danger">Lastname is required</p>
+            )}
+          </Form.Group>
 
-          <h4>Correo institucional</h4>
-          <input type="text" {...register("email", { required: true })} />
-          {errors.email && (
-            <p className="text-danger">Este campo es requerido</p>
-          )}
+          
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Correo institucional</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Correo"
+              {...register("email", { required: true })}
+            />
+            {errors.email && <p className="text-danger">Email is required</p>}
+          </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Contraseña</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Password"
+              placeholder="Contrasena"
               {...register("password", { required: true })}
             />
             {errors.password && (

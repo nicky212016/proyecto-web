@@ -32,6 +32,13 @@ const Pisos = () => {
           }
           piso={"3"}
         />
+        <PisoCard
+          aula={aula}
+          imgUrl={
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlbZb7nphMjqeMhPRZT3L8xlYF8D0DD0v9Yw&s"
+          }
+          piso={"4"}
+        />
       </div>
     </>
   );

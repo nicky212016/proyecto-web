@@ -13,7 +13,7 @@ const Header = ({ titulo }) => {
         <Link to="/aulas" className="ur-header-link">
           <img
             className="ur-header-logo"
-            src="https://s3-alpha.figma.com/hub/file/1913095808/a7bdc469-cd70-4ea1-bb57-b59204ad8182-cover.png"
+            src="https://pattern.uao.edu.co/images/nuevologo.png"
             alt="logo"
           />
         </Link>
