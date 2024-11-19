@@ -3,16 +3,17 @@ import React from "react";
 import "./Aulas.css";
 import AulaCard from "./AulaCard";
 import Header from "../generalComponents/Header";
+import AulaImg from '../imagenes/Aula.jpeg'
 
 const Aulas = () => {
   return (
     <>
       <Header titulo={"Aulas"} />      
       <div className="ur-Aulas">
-        <AulaCard aula={'1'} imgUrl={'https://media.cnn.com/api/v1/images/stellar/prod/cnne-1479579-las-declaraciones-de-maduro-tras-firmar-el-acuerdo-de-barbados.jpg?c=original'}/>
-        <AulaCard aula={'2'} imgUrl={'https://steamuserimages-a.akamaihd.net/ugc/2504639238669974091/72E61C5E512E39DF5B4D3156594F9D22D75A291A/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true'}/>
-        <AulaCard aula={'3'} imgUrl={'https://w7.pngwing.com/pngs/134/113/png-transparent-tyler-joseph-twenty-%C3%98ne-pil%C3%98ts-singer-others-face-head-musician-thumbnail.png'}/>
-        <AulaCard aula={'4'} imgUrl={'https://www.illuminidol.com/cdn/shop/products/Josh_Dun_Illuminidol_Celebrity_Prayer_Candle.jpg?v=1540321176&width=1445'}/>
+        <AulaCard aula={'1'} imgUrl={AulaImg}/>
+        <AulaCard aula={'2'} imgUrl={AulaImg}/>
+        <AulaCard aula={'3'} imgUrl={AulaImg}/>
+        <AulaCard aula={'4'} imgUrl={AulaImg}/>
         {/* <div className="column left-column">
           <div className="aulas1-card">
             <div className="aulas1-card1"></div>

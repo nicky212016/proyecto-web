@@ -20,7 +20,7 @@ const AulaCard = ({ aula, imgUrl }) => {
   const handleClick = () => {};
 
   return (
-    <Link to={"/pisos"} state={{aula : aula}}>
+    <Link className = "ur-aulaCard-link" to={"/pisos"} state={{aula : aula}}>
       <div
         className={divClassName}
         onMouseEnter={handleMouseEnter}

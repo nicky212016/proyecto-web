@@ -8,6 +8,7 @@
     width: 50vh;
     background: #9e0b0f;
     border-radius: 20px;
+    text-decoration:none;
 }
 
 .ur-aulaCard.hover{
@@ -32,4 +33,8 @@
     font-weight: bold;
     color: #ffffff;
     margin-bottom: 10px;
+}
+
+.ur-aulaCard-link{
+    text-decoration: none;
 }
